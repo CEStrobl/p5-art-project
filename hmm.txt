@@ -1,0 +1,26 @@
+The x-velocity is 
+
+52/27 (1.93 px/frame) 
+
+
+and y-velocity is 
+
+13/27 (.48 px/frame). 
+
+
+Then if you want the animation to look smoother, 
+you get into another math problem - easing - 
+where you still travel the same distance across the same timeline but 
+you want it to start and end smoothly. You can multiply your distance
+ calculation with an easing function like these ones here: https://gist.github.com/gre/1650294 
+ - I think it's  
+
+ { distance / time * easing-function(current frame/total frames) } 
+
+ which probably looks like 
+
+ 52/27*easeInOutCubic(currentFrame/27) 
+
+
+ // acceleration until halfway, then deceleration 
+  easeInOutCubic: t => t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1
